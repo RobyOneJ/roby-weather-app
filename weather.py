@@ -103,7 +103,16 @@ def find_max(weather_data):
     Returns:
         The maximum value and it's position in the list. (In case of multiple matches, return the index of the *last* example in the list.)
     """
-    pass
+    if len(weather_data) == 0:
+        return ()
+    max = None
+    pos = 0
+    for i in range(0,len(weather_data)):
+        n = float(weather_data[i])
+        if i == 0 or n >= max:
+            max = n
+            pos = i
+    return (max, pos)
 
 
 def generate_summary(weather_data):

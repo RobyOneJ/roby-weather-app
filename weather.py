@@ -17,25 +17,28 @@ def format_temperature(temp):
 
 
 def convert_date(iso_string):
-    """Converts and ISO formatted date into a human readable format.
+    """Converts and ISO formatted date into a human readable format. 
 
     Args:
         iso_string: An ISO date string..
     Returns:
         A date formatted like: Weekday Date Month Year e.g. Tuesday 06 July 2021
     """
-    pass
-
+    date = datetime.fromisoformat(iso_string)
+    return date.strftime("%A %d %B %Y")
+        
+    
 
 def convert_f_to_c(temp_in_farenheit):
-    #Converts an temperature from farenheit to celcius and make it a float.
-        degrees_c = (float(temp_in_farenheit) - 32)/1.8
+    """Converts an temperature from farenheit to celcius and make it a float. 
 
-    #Args:
-        #temp_in_farenheit: float representing a temperature.
-    #Returns:
-    # A float representing a temperature in degrees celcius, rounded to 1dp.
-        return round(degrees_c, 1)
+    Args:
+        temp_in_farenheit: float representing a temperature.
+    Returns:
+        A float representing a temperature in degrees celcius, rounded to 1dp.
+    """
+    degrees_c = (float(temp_in_farenheit) - 32)/1.8
+    return round(degrees_c, 1)
 
 
 def calculate_mean(weather_data):
@@ -50,7 +53,13 @@ def calculate_mean(weather_data):
 
 
 def load_data_from_csv(csv_file):
-    #Reads a csv file and stores the data in a list.
+    """Reads a csv file and stores the data in a list.
+            
+    Args:
+        csv_file: a string representing the file path to a csv file.
+    Returns:
+        A list of lists, where each sublist is a (non-empty) line in the csv file.
+    """
     with open(csv_file, encoding="utf-8") as file:
         reader = csv.reader(file, delimiter = ',')
         next(reader)
@@ -59,14 +68,7 @@ def load_data_from_csv(csv_file):
             if len(row) > 0:
                 result.append([row[0],int(row[1]), int(row[2])]) 
         return(result)
-        
-    #Args:
-        #csv_file: a string representing the file path to a csv file.
-    #Returns:
-        #A list of lists, where each sublist is a (non-empty) line in the csv file.
     
-    
-
 
 def find_min(weather_data):
     """Calculates the minimum value in a list of numbers.

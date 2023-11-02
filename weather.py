@@ -28,7 +28,6 @@ def convert_date(iso_string):
     return date.strftime("%A %d %B %Y")
         
     
-
 def convert_f_to_c(temp_in_farenheit):
     """Converts an temperature from farenheit to celcius and make it a float. 
 
@@ -53,7 +52,6 @@ def calculate_mean(weather_data):
     for n in weather_data:
         sum = sum + float(n)
     return sum/len(weather_data)
-
 
 
 def load_data_from_csv(csv_file):
@@ -94,7 +92,6 @@ def find_min(weather_data):
     return (min, pos)
 
 
-
 def find_max(weather_data):
     """Calculates the maximum value in a list of numbers.
 
@@ -123,8 +120,24 @@ def generate_summary(weather_data):
     Returns:
         A string containing the summary information.
     """
-    pass
-
+    def temperatures(index):
+        temperatures = []
+        for row in weather_data:
+            temperatures.append(row[index])
+        return temperatures
+    
+    min_temps = temperatures(1)
+    max_temps = temperatures(2)   
+    min = find_min(min_temps)
+    max = find_max(max_temps) 
+    
+    days = len(weather_data)
+    return f"{days} Day Overview\n" + \
+        f"  The lowest temperature will be {convert_f_to_c(min[0])}°C, and will occur on {convert_date(weather_data[min[1]][0])}.\n" + \
+        f"  The highest temperature will be {convert_f_to_c(max[0])}°C, and will occur on {convert_date(weather_data[max[1]][0])}.\n" + \
+        f"  The average low this week is {convert_f_to_c(calculate_mean(min_temps))}°C.\n" + \
+        f"  The average high this week is {convert_f_to_c(calculate_mean(max_temps))}°C.\n"
+ 
 
 def generate_daily_summary(weather_data):
     """Outputs a daily summary for the given weather data.

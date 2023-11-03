@@ -147,4 +147,13 @@ def generate_daily_summary(weather_data):
     Returns:
         A string containing the summary information.
     """
-    pass
+
+    daily_summary = ""
+
+    for row in weather_data:
+        daily_summary = daily_summary + \
+        f"---- {convert_date(row[0])} ----\n" + \
+        f"  Minimum Temperature: {convert_f_to_c(row[1])}°C\n" + \
+        f"  Maximum Temperature: {convert_f_to_c(row[2])}°C\n\n"
+ 
+    return daily_summary
